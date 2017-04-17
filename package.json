@@ -1,0 +1,12 @@
+{
+  "name": "LIET",
+  "version": "0.1.1",
+  "description": "Light aided Information Encoding and Transmission",
+  "main": "index.js",
+  "repository": "https://github.com/zeroby0/LIET.git",
+  "author": "<zerodividedby0@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "serialport": "5.0.0-beta3"
+  }
+}
