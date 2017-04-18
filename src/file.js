@@ -1,5 +1,5 @@
-const recv_file = require('./recv_file.js');
-const send_file = require('./send_file.js');
+const recvFile = require('./recieveFile.js');
+const sendFile = require('./send_file.js');
 
-exports.recvFile = recv_file.recvFile;
-exports.sendFile = send_file.sendFile;
+exports.recieveFile = recvFile.recvFile;
+exports.sendFile = sendFile.sendFile;

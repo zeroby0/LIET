@@ -1,10 +1,10 @@
 const file = require('./file.js');
 
 exports.recvFile = function (data, pstate) {
-	pstate.handlerState.stage = 'recv-recv_file';
+	state.handlerState = {status: 'handshake',};
 	return file.recvFile;
 }
 
 exports.sendFile = function(data, pstate) {
-	pstate.handlerState.stage = ''
+
 }
