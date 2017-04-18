@@ -9,11 +9,7 @@ var port = new SerialPort(device_id, {
   baudRate: baud_rate,
 });
 
-port.open(function (err) {
-  if (err) {
-    return console.log('Error opening port: ', err.message);
-  }
-});
+
 
 
 port.on('error', function(err) {
@@ -26,19 +22,8 @@ port.on('data', function (data){
 
 });
 
-
-
-// port.write(new Buffer(22).toString('base64'));
-
-function send(data, port){
-	// var number_of_cycles = Math.ceil(Buffer.byteLength(data, 'utf8')/32);
-	// port.write(''+number_of_cycles);
-	// port.drain();
-	// port.write(data);
-	// port.drain();
-	port.write(data);
-	port.write(data);
-	port.write(data);
-}
-
-send('helloskdjaksdjf askdjhfkjsadhfsadfdas', port);
+port.open(function (err) {
+  if (err) {
+    return console.log('Error opening port: ', err.message);
+  }
+});

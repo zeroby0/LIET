@@ -7,6 +7,6 @@
   "author": "<zerodividedby0@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "serialport": "5.0.0-beta3"
+    "serialport": "4.0.7"
   }
 }
