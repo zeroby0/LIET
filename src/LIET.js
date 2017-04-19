@@ -13,7 +13,7 @@ class LIET {
             if (err) {
                 console.log('Error opening port: ', err.message);
             }
-            liet.sendInstruction('sssssssabcdefghijklmnopqrstuvwxyz1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ'+'abcdefghijklmnopqrstuvwxyz1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ'+'abcdefghijklmnopqrstuvwxyz1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ'+'abcdefghijklmnopqrstuvwxyz1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZw');
+            liet.sendInstruction('ssssssssabcdefghijklmnopqrstuvwxyz1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ'+'abcdefghijklmnopqrstuvwxyz1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ'+'abcdefghijklmnopqrstuvwxyz1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ'+'abcdefghijklmnopqrstuvwxyz1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZw');
             console.log('Sent instruction');
         });
 
@@ -25,12 +25,12 @@ class LIET {
 
         this.instructionMeta = {
             cycleCount: null,
-            data: null,
+            data: '',
         };
 
         this.outstructionMeta = {
             cycleCount: null,
-            data: null,
+            data: '',
         };
 
     }
@@ -61,7 +61,7 @@ class LIET {
     resetInstructionMeta() {
         this.instructionMeta = {
             cycleCount: null,
-            data: null,
+            data: '',
         };
     }
 
@@ -116,7 +116,7 @@ class LIET {
     resetOutstructionMeta(){
         this.outstructionMeta = {
             cycleCount: null,
-            data: null,
+            data: '',
         };
     }
 
@@ -150,6 +150,8 @@ class LIET {
     }
 
     parser(data) {
+        this.resetOutstructionMeta();
+        this.resetInstructionMeta();
         console.log('parser: ',data);
     }
 }
