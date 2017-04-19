@@ -10,5 +10,5 @@ exports.parser = function (data) {
 	// console.log(asdata);
 	// console.log(instruction);	
 	console.log(data);
-	console.log(Buffer.byteLength(data, 'utf8'));
+	console.log(Buffer.byteLength(data));
 };
