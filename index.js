@@ -1,7 +1,7 @@
 const LIET = require('./src/LIET.js');
 
-const deviceId = '/dev/cu.wchusbserial1420';
-const baudRate = 9600;
+const deviceId = '/dev/cu.wchusbserial1410';
+const baudRate = 57600;
 
 const liet = new LIET(deviceId, baudRate);
 

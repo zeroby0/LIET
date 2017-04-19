@@ -6,14 +6,14 @@ class LIET {
             baudRate,
         });
         this.port.on('error', err =>
-            console.log('Error occured : ', err)
+            console.log('Error occured : ', err.message)
         );
 
         this.port.open((err, liet=this) => {
             if (err) {
                 console.log('Error opening port: ', err.message);
             }
-            liet.sendInstruction('ssssssssabcdefghijklmnopqrstuvwxyz1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ'+'abcdefghijklmnopqrstuvwxyz1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ'+'abcdefghijklmnopqrstuvwxyz1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ'+'abcdefghijklmnopqrstuvwxyz1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZw');
+            liet.sendInstruction('s');
             console.log('Sent instruction');
         });
 
@@ -140,12 +140,20 @@ class LIET {
     sendInstruction(instruction) {
         console.log('{send instruction}');
         this.port.flush(() => {
-            const cycleCount = (Math.ceil(Buffer.byteLength(instruction) / 32.0) - 1).toString();
+
+            const LENGTH_OF_DATA_RECIEVED = 32.0;
+            const LENGTH_OF_DATA_TO_BE_SENT = Buffer.byteLength(instruction);
+            const CYCLE_COUNT = ( LENGTH_OF_DATA_TO_BE_SENT/LENGTH_OF_DATA_RECIEVED  - 1 );
+            const INT_CYCLE_COUNT = Math.ceil( CYCLE_COUNT );
+
+            const cycleCount = ( INT_CYCLE_COUNT ).toString();
+
             this.outstructionMeta = {
                 cycleCount,
                 data: instruction,
             };
             this.sendCycleCount();
+
         });
     }
 
