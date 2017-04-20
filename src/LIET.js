@@ -1,20 +1,27 @@
 const SerialPort = require('serialport');
+const Parser = require('./parser');
 
 class LIET {
-    constructor(deviceId, baudRate) {
+    constructor(deviceId, baudRate, todo) {
         this.port = new SerialPort(deviceId, {
             baudRate,
         });
+
+        this.parser = new Parser();
+        // function to call once module is ready
+        this.todo = todo;
+
         this.port.on('error', err =>
             console.log('Error occured : ', err.message)
         );
+
+
 
         this.port.open((err, liet=this) => {
             if (err) {
                 console.log('Error opening port: ', err.message);
             }
-            liet.sendInstruction('s');
-            console.log('Sent instruction');
+            liet.todo(liet);
         });
 
         this.port.on('open', () => {
@@ -33,6 +40,10 @@ class LIET {
             data: '',
         };
 
+    }
+
+    makeHash(data) {
+        return require('crypto').createHash('md5').update(data).digest("hex");
     }
 
     recievedData(data) {
@@ -66,7 +77,10 @@ class LIET {
     }
 
     sendInstructionToParser() {
-        this.parser(this.instructionMeta.data);
+        this.parser.parse(this.instructionMeta.data);
+        this.resetOutstructionMeta();
+        this.resetInstructionMeta();
+
     }
 
     // cycleCount : string
@@ -155,12 +169,6 @@ class LIET {
             this.sendCycleCount();
 
         });
-    }
-
-    parser(data) {
-        this.resetOutstructionMeta();
-        this.resetInstructionMeta();
-        console.log('parser: ',data);
     }
 }
 module.exports = LIET;
