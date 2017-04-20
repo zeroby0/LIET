@@ -1,6 +1,6 @@
 const LIET = require('./src/LIET.js');
 
-const deviceId = '/dev/cu.wchusbserial1410';
+const deviceId = '/dev/cu.wchusbserial1420';
 const baudRate = 57600;
 
 
@@ -10,7 +10,7 @@ let todo = function (liet) {
 		number: 524,
 		array: [1,2,3,'ara', 4,5]
 	} 
-	liet.sendInstruction(JSON.stringify(inst));
+	liet.sendInstruction(inst);
 	console.log('Sent instruction');
 }
 

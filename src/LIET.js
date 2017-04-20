@@ -1,4 +1,5 @@
 const SerialPort = require('serialport');
+const sha1 = require('sha1');
 const Parser = require('./parser');
 
 class LIET {
@@ -32,18 +33,19 @@ class LIET {
 
         this.instructionMeta = {
             cycleCount: null,
-            data: '',
+            data: ''
         };
 
         this.outstructionMeta = {
             cycleCount: null,
-            data: '',
+            data: ''
         };
 
     }
 
     makeHash(data) {
-        return require('crypto').createHash('md5').update(data).digest("hex");
+        const hash = sha1(data);
+        return hash.substring(0,6);
     }
 
     recievedData(data) {
@@ -72,7 +74,7 @@ class LIET {
     resetInstructionMeta() {
         this.instructionMeta = {
             cycleCount: null,
-            data: '',
+            data: ''
         };
     }
 
@@ -152,11 +154,14 @@ class LIET {
      * of recievedData(data) function
      */
     sendInstruction(instruction) {
+        const stringifiedInstruction = JSON.stringify(instruction);
+        const instructionHash = this.makeHash(stringifiedInstruction);
+        const dataToBeSent = stringifiedInstruction + instructionHash;
         console.log('{send instruction}');
         this.port.flush(() => {
 
             const LENGTH_OF_DATA_RECIEVED = 32.0;
-            const LENGTH_OF_DATA_TO_BE_SENT = Buffer.byteLength(instruction);
+            const LENGTH_OF_DATA_TO_BE_SENT = Buffer.byteLength(dataToBeSent);
             const CYCLE_COUNT = ( LENGTH_OF_DATA_TO_BE_SENT/LENGTH_OF_DATA_RECIEVED  - 1 );
             const INT_CYCLE_COUNT = Math.ceil( CYCLE_COUNT );
 
@@ -164,7 +169,7 @@ class LIET {
 
             this.outstructionMeta = {
                 cycleCount,
-                data: instruction,
+                data: dataToBeSent,
             };
             this.sendCycleCount();
 
