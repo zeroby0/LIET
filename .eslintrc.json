@@ -38,7 +38,6 @@
         "import"
     ],
     "rules": {
-    	"indent": [ 2, 4 ],
-    	"skipBlankLines": true	
+    	"indent": [ 2, 4 ]
     }
 }
