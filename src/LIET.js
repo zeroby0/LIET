@@ -1,38 +1,46 @@
 const SerialPort = require('serialport');
 const EventEmitter = require('events');
 
+const Server = require('./server');
 const Packet = require('./packet');
 // const DB = require('./database');
 
 class LIET extends EventEmitter {
     constructor(deviceId, baudRate, todo) {
         super();
+
         this.todo = todo;
         this.port = new SerialPort(deviceId, {
             baudRate,
         });
         this.setPortEvents();
         this.setModuleEvents();
+        this.server = new Server(this.port);
+    }
+
+    sendPacket(header, payload) {
+        const packet = new Packet({ header, payload });
+        this.server.sendPacket(packet);
+    }
+
+    onPacket(packet) {
+        if (packet.isValid()) {
+            this.server.parsePacket(packet);
+        } else {
+            this.rejectPacket(packet);
+        }
+    }
+
+    rejectPacket(packet) {
+        packet.setRejected();
+        this.server.sendPacket(packet);
     }
 
     setModuleEvents() {
         this.on('data_recieved', (data) => {
             const packet = new Packet({ data });
-            LIET.onPacket(packet);
+            this.onPacket(packet);
         });
-    }
-
-    sendPacket(header, payload) {
-        const packet = new Packet({ header, payload });
-        this.port.write(packet.getString());
-    }
-
-    static onPacket(packet) {
-        if (packet.isValid()) {
-            console.log('valid packet: ', packet.getLayout());
-        } else {
-            console.log('error: ', packet.getLayout());
-        }
     }
 
     setPortEvents() {
@@ -58,6 +66,3 @@ class LIET extends EventEmitter {
 }
 
 module.exports = LIET;
-
-
-

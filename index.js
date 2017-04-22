@@ -10,9 +10,9 @@ function todo(liet) {
     liet.sendPacket('ab', 'Aravind');
 }
 
-if (process.argv.length == 2) {
+if (process.argv.length === 2) {
     new LIET(deviceId, baudRate, todo);
-} else if (process.argv.length == 3) {
+} else if (process.argv.length === 3) {
     new LIET(altId, baudRate, todo);
 }
 

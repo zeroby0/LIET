@@ -1,3 +1,8 @@
+// [header - 2][payload - 24][hash - 6]
+// [header] = [function_id][flags]
+// [function_id] = [UXXXXXXX]
+// [flags] = [U|Last_packet = 1|Packet_count = 6]
+
 const sha1 = require('sha1');
 const config = require('config');
 
@@ -8,14 +13,7 @@ const hashLength = config.get('packet.hash_bytes');
 class Packet {
 
     constructor({ data, header, payload }) {
-        if (data) {
-            this.string = new Buffer(data, 'base64').toString('ascii');
-        } else {
-            this.string = Packet.generatePacket(header, payload);
-            if (!this.isValid()) {
-                console.error('Invalid Packed generated');
-            }
-        }
+        this.setString({ data, header, payload });
     }
 
     static generatePacket(header, payload) {
@@ -40,6 +38,17 @@ class Packet {
         return  '[' + this.getHeader()  + ']' +
                 '[' + this.getPayload() + ']' +
                 '[' + this.getHash()    + ']';
+    }
+
+    setString({ data, header, payload }) {
+        if (data) {
+            this.string = new Buffer(data, 'base64').toString('ascii');
+        } else {
+            this.string = Packet.generatePacket(header, payload);
+            if (!this.isValid()) {
+                console.error('Invalid Packed generated');
+            }
+        }
     }
 
     getString() {
@@ -81,6 +90,19 @@ class Packet {
         const packet = this.string;
         const headAndPayload = Packet.getFirstNBytes(packet, headerLength + payloadLength);
         return Packet.getLastNBytes(headAndPayload, payloadLength);
+    }
+
+    setRejected() {
+        const replaceCharAt = (s, i, c) => {
+            if (i > s.length - 1) return s;
+            return s.substr(0, i) + c + s.substr(i + 1);
+        };
+
+        const header = this.getHeader();
+        const payload = this.getPayload();
+
+        const newheader = replaceCharAt(header, 0, '~');
+        this.setString({ header: newheader, payload });
     }
 }
 
