@@ -7,6 +7,9 @@
   "author": "<zerodividedby0@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "config": "^1.25.1",
+    "lokijs": "^1.4.3",
+    "node-pre-gyp": "^0.6.34",
     "serialport": "4.0.7",
     "sha1": "^1.1.1"
   },

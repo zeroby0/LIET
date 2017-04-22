@@ -1,19 +1,20 @@
+const config = require('config');
 const LIET = require('./src/LIET.js');
 
-const deviceId = '/dev/cu.wchusbserial1420';
-const baudRate = 57600;
+const deviceId = config.get('project.device_id');
+const baudRate = config.get('project.baud_rate');
 
+const altId = '/dev/cu.wchusbserial1420';
 
 function todo(liet) {
-    const inst = {
-        name: 'Aravind',
-        number: 524,
-    };
-    liet.sendInstruction(inst);
-    console.log('Sent instruction');
+    liet.sendPacket('ab', 'Aravind');
 }
 
-new LIET(deviceId, baudRate, todo);
+if (process.argv.length == 2) {
+    new LIET(deviceId, baudRate, todo);
+} else if (process.argv.length == 3) {
+    new LIET(altId, baudRate, todo);
+}
 
 // liet.sendInstruction("Hello World");
 

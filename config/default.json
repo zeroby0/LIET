@@ -1,0 +1,17 @@
+{
+	"project": {
+		"baud_rate": 57600,
+		"device_id": "/dev/cu.wchusbserial1410"
+	},
+
+	"database": {
+		"db_path": "../data/db.json"
+	},
+
+	"packet": {
+		"packet_length": 32,
+		"header_bytes": 2,
+		"payload_bytes": 24,
+		"hash_bytes": 6
+	}
+}
