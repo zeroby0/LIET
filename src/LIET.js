@@ -20,7 +20,7 @@ class LIET extends EventEmitter {
 
     sendPacket(header, payload) {
         const packet = new Packet({ header, payload });
-        this.server.sendPacket(packet);
+        this.server.writePacket(packet);
     }
 
     onPacket(packet) {
@@ -33,7 +33,7 @@ class LIET extends EventEmitter {
 
     rejectPacket(packet) {
         packet.setRejected();
-        this.server.sendPacket(packet);
+        this.server.writePacket(packet);
     }
 
     setModuleEvents() {

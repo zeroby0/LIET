@@ -86,6 +86,13 @@ class Packet {
         return Packet.getLastNBytes(packet, hashLength);
     }
 
+    getNumber() {
+        const header = this.getHeader();
+        const binary = header.charCodeAt(0);
+        const number = binary & 0b01111111; // 127 is forbidden
+        return number;
+    }
+
     getPayload() {
         const packet = this.string;
         const headAndPayload = Packet.getFirstNBytes(packet, headerLength + payloadLength);
