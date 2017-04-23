@@ -23,7 +23,8 @@ class Server {
 
         const packetString = fnByte + numByte + payload;
         const packet = new Packet(packetString);
-        this.packetArray().splice(this.count, 0, packet);  //insert
+        //insert
+        this.packetArray().splice(this.count, 0, packet);  
         this.writePacket(packet);
     }
 
