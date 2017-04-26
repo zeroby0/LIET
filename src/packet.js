@@ -51,6 +51,10 @@ class Packet {
         }
     }
 
+    isAckPacket() {
+        return this.getHeader()[0] === 'a';
+    }
+
     getString() {
         return this.string;
     }

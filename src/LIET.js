@@ -24,16 +24,7 @@ class LIET extends EventEmitter {
     }
 
     onPacket(packet) {
-        if (packet.isValid()) {
-            this.server.parsePacket(packet);
-        } else {
-            this.rejectPacket(packet);
-        }
-    }
-
-    rejectPacket(packet) {
-        packet.setRejected();
-        this.server.sendPacket(packet);
+        this.server.onPacket(packet);
     }
 
     setModuleEvents() {

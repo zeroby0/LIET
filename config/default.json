@@ -13,5 +13,14 @@
 		"header_bytes": 2,
 		"payload_bytes": 24,
 		"hash_bytes": 6
+	},
+
+	"protocol": {
+		"pool" : {
+			"size": 126
+		},
+		"ocean" : {
+			"depth": 10000;
+		}
 	}
 }
