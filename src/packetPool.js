@@ -13,6 +13,10 @@ class PacketPool {
         this.marker = 0;
     }
 
+    getOcean(){
+        return this.ocean;
+    }
+
     moveForward() {
         this.marker += 1;
         this.currentDepth += 1;
