@@ -29,8 +29,8 @@ class PacketPool {
         this.pool[this.marker] = pkt;
     }
 
-    getLatest() {
-        return this.pool[this.marker];
+    getLatest(n = 0) {
+        return this.pool[this.marker - n];
     }
 }
 
