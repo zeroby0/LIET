@@ -23,13 +23,17 @@ class Server {
 
         const packetString = fnByte + numByte + payload;
         const packet = new Packet(packetString);
-        //insert
-        this.packetArray().splice(this.count, 0, packet);  
+        // insert
+        this.packetArray().splice(this.count, 0, packet);
         this.writePacket(packet);
     }
 
     writePacket(packet) {
         this.port.write(packet.getString());
+    }
+
+    rejectPacket(packet) {
+        
     }
 
     parsePacket(packet) {
