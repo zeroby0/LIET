@@ -13,6 +13,7 @@ const hashLength = config.get('packet.hash_bytes');
 class Packet {
 
     constructor({ data, header, payload }) {
+        // console.log(data, '   ', header, '  ', payload);
         this.setString({ data, header, payload });
     }
 
@@ -43,7 +44,9 @@ class Packet {
     setString({ data, header, payload }) {
         if (data) {
             this.string = new Buffer(data, 'base64').toString('ascii');
+            // console.log('genpkt ', this.string);
         } else {
+            console.log(header, ' ', payload);
             this.string = Packet.generatePacket(header, payload);
             if (!this.isValid()) {
                 console.error('Invalid Packed generated');

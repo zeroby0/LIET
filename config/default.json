@@ -1,6 +1,6 @@
 {
 	"project": {
-		"baud_rate": 57600,
+		"baud_rate": 110,
 		"device_id": "/dev/cu.wchusbserial1410"
 	},
 

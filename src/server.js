@@ -6,7 +6,8 @@ class Server {
     }
 
     sendPacket(packet) {
-        this.port.write(packet.getString());
+        console.log('tra ',packet.getString());
+        this.port.write(String(packet.getString()));
     }
 
     parsePacket(packet) {
@@ -18,6 +19,7 @@ class Server {
             break;
         case 'a':
             console.log('Testing');
+            console.log(packet.getLayout());
             break;
         default:
             console.log('null packet');
