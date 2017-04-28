@@ -1,6 +1,11 @@
 # LIET - Light aided Information Encoding and Transmission
 
-IIIT Bangalore IMTech 2015 batch Electronic Devices and Circuit Theory project,
+Optical Wireless communication via transmission of encoded data; IIIT Bangalore - IMTech 2015 Electronic Devices and Circuit Theory project under the guidance of prof Madhav Rao.  
+
+LIET is a form of Visible light communication that can be scaled up to transmit at very high speeds.
+By using visible part of the electromagnetic spectrum, LIET facilitates communication while providing illumination. And by using the very wide spectrum of Visible Light (400 THz), several p2p nodes can be multiplexed for very high speed data transmission while never having to worry about bandwidth congestion.
+
+LIET is an exploratory project and is inspired by Li-Fi - https://en.wikipedia.org/wiki/Li-Fi. For a more in-depth explanation and working, checkout the Youtube link below.
 
 ## Light based communication protocol server.
 
@@ -12,7 +17,8 @@ Clone and run `yarn` or `npm install` to get started.
 
 Please take a look at [`demo`](https://github.com/zeroby0/LIET/tree/demo) branch for code used for demonstration and a REPL interface.
 
-Video: [Youtube](https://youtu.be/o-Z-uOQuc-M), [Drive](https://drive.google.com/file/d/0Bx1TITnG0OAYdnBlX2o4QVFvbHM/view?usp=sharing)
+Video: [Youtube](https://youtu.be/o-Z-uOQuc-M), [Drive](https://drive.google.com/file/d/0Bx1TITnG0OAYdnBlX2o4QVFvbHM/view?usp=sharing)  
+Announcement: https://www.facebook.com/aravindreddyv/posts/1084763588335059
 
 Team:
 
